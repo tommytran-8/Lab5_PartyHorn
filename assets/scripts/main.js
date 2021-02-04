@@ -1,6 +1,3 @@
-// main.js
-
-// TODO
 const form = document.getElementById("party-horn-form");
 const hornsound = document.getElementById("horn-sound");
 const soundimage = document.getElementById("sound-image");
@@ -19,9 +16,11 @@ const listofvolume = [volumenumber, volumeslider];
  
 
 form.addEventListener("submit", (e)=>{
+    e.preventDefault();
+
+    //resets and plays
     hornsound.pause();
     hornsound.currentTime = 0;
-    e.preventDefault();
     hornsound.play();
 });
 
@@ -44,7 +43,7 @@ listofhorn.forEach( horn =>{
 
 
 listofvolume.forEach(volume =>{
-    volume.addEventListener('pointermove', ()=>{
+    volume.addEventListener('input', ()=>{
         if (volume === volumenumber){   
             volumeslider.value = volume.value;
         }
@@ -67,21 +66,4 @@ listofvolume.forEach(volume =>{
         hornsound.volume = volume.value/100;
     });
     
-});
-volumenumber.addEventListener('input', ()=>{
-    
-    volumeslider.value = volumenumber.value;
-    if (volumenumber.value > 66){
-        volumeimage.src = "./assets/media/icons/volume-level-3.svg";
-    }
-    else if (volumenumber.value > 33){
-        volumeimage.src = "./assets/media/icons/volume-level-2.svg";
-    }
-    else if (volumenumber.value > 0){
-        volumeimage.src = "./assets/media/icons/volume-level-1.svg";
-    }
-    else{
-        volumeimage.src = "./assets/media/icons/volume-level-0.svg";
-    }
-    hornsound.volume = volumenumber.value/100;
 });
